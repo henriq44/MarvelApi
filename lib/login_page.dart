@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_test/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key? key }) : super(key: key);
@@ -38,6 +40,27 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  login() async {
+    try {
+      await context.read<AuthService>().login(email.text,senha.text);
+    } on AuthException catch (e){
+      ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(e.message)));
+    }
+  }
+
+registrar() async {
+    try {
+      await context.read<AuthService>().login(email.text,senha.text);
+    } on AuthException catch (e){
+      ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(e.message)));
+    }
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -53,9 +76,9 @@ class _LoginPageState extends State<LoginPage> {
            ),
          ),
          Padding(
-           padding: EdgeInsets.all(24),
+           padding: const EdgeInsets.all(24),
            child: TextFormField(controller: email,
-           decoration: InputDecoration(
+           decoration: const InputDecoration(
              border: OutlineInputBorder(),
              labelText: 'Email',
            ),
@@ -68,11 +91,11 @@ class _LoginPageState extends State<LoginPage> {
            },
            ),
            ),
-           Padding(padding: EdgeInsets.symmetric(vertical: 12.00, horizontal: 24.00),
+           Padding(padding: const EdgeInsets.symmetric(vertical: 12.00, horizontal: 24.00),
            child: TextFormField(
              controller: senha,
              obscureText: true,
-             decoration: InputDecoration(
+             decoration: const InputDecoration(
                border: OutlineInputBorder(),
                labelText: 'senha',
              ),
@@ -86,23 +109,32 @@ class _LoginPageState extends State<LoginPage> {
              },
            ),
            ),
-           Padding(padding: EdgeInsets.all(24.0),
+           Padding(padding: const EdgeInsets.all(24.0),
            child: ElevatedButton(
-             onPressed: () {},
+             onPressed: () {
+               if (formKey.currentState!.validate()){
+                 if (isLogin){
+                 login();
+               } else{
+                 registrar();
+               }
+               }
+             },
              child: Row(
                mainAxisAlignment: MainAxisAlignment.center,
                children: [
-                 Icon(Icons.check),
-                 Padding(padding: EdgeInsets.all(16.0),
+                 const Icon(Icons.check),
+                 Padding(padding: const EdgeInsets.all(16.0),
                  child: Text(
                    actionButton,
-                   style: TextStyle(fontSize: 20),
+                   style: const TextStyle(fontSize: 20),
                  ),
                  )
                ],
              ),
            ),
-           )
+           ),
+           TextButton(onPressed: () => setFormAction (!isLogin), child: Text(toggleButton))
        ]), ) , ),)
     );
   }

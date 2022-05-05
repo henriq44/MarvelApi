@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:marvel_test/model/character_model.dart';
@@ -96,4 +95,29 @@ Widget _stateLoadCharacters (context) {
       throw Exception();
     }
   }
+
 }
+
+/*
+Padding(
+  padding: EdgeInsets.symmetric(vertical:24),
+  child: Outlinebutton(
+    onPressed: () => context.read<AuthService>().logout(),
+    style: Outlinebutton.styleFrom(
+      primary:Colors.red,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding:EdgeInsets.all(16.0),
+          chidl: Text(
+            'Sair do App',
+            Style: TextStyle(fontSize: 18),
+          )
+        )
+      ]
+    )
+  )
+) 
+*/
