@@ -51,7 +51,58 @@ class _LoginPageState extends State<LoginPage> {
              fontWeight: FontWeight.bold,
              letterSpacing: -1.5,
            ),
-         )
+         ),
+         Padding(
+           padding: EdgeInsets.all(24),
+           child: TextFormField(controller: email,
+           decoration: InputDecoration(
+             border: OutlineInputBorder(),
+             labelText: 'Email',
+           ),
+           keyboardType: TextInputType.emailAddress,
+           validator: (value){
+             if (value!.isEmpty){
+               return 'Informe o email corretamnete!';
+             }
+             return null;
+           },
+           ),
+           ),
+           Padding(padding: EdgeInsets.symmetric(vertical: 12.00, horizontal: 24.00),
+           child: TextFormField(
+             controller: senha,
+             obscureText: true,
+             decoration: InputDecoration(
+               border: OutlineInputBorder(),
+               labelText: 'senha',
+             ),
+             validator: (value) {
+               if (value!.isEmpty){
+                 return 'informa sua senha!';
+               } else if (value.length <6){
+                 return 'sua senha deve ter no mínimo 6 caracteres';
+               }
+               return null;
+             },
+           ),
+           ),
+           Padding(padding: EdgeInsets.all(24.0),
+           child: ElevatedButton(
+             onPressed: () {},
+             child: Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Icon(Icons.check),
+                 Padding(padding: EdgeInsets.all(16.0),
+                 child: Text(
+                   actionButton,
+                   style: TextStyle(fontSize: 20),
+                 ),
+                 )
+               ],
+             ),
+           ),
+           )
        ]), ) , ),)
     );
   }
